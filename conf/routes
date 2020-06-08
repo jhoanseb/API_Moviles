@@ -1,0 +1,55 @@
+# Routes
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+#Usuarios
+GET     /usuario/get/:Apodo     controllers.UsuariosController.get(Apodo : String)
+POST    /usuario/create                   controllers.UsuariosController.create
+POST    /usuario/update                   controllers.UsuariosController.update
+POST    /usuario/delete                   controllers.UsuariosController.delete
+
+#Seguidores
+POST    /usuario/createSeguir                   controllers.UsuariosController.createSeguir
+GET    /usuario/getSeguidos/$idUsuario<\d+>          controllers.UsuariosController.getSeguidos(idUsuario : Int)
+GET    /usuario/getSeguidores/$idUsuario<\d+>          controllers.UsuariosController.getSeguidores(idUsuario : Int)
+POST    /usuario/deleteSeguir                   controllers.UsuariosController.deleteSeguir
+
+#Bloquear
+POST    /usuario/createBloquear                   controllers.UsuariosController.createBloquear
+GET    /usuario/getBloqueados/$idUsuario<\d+>          controllers.UsuariosController.getBloqueados(idUsuario : Int)
+POST    /usuario/deleteBloqueado         controllers.UsuariosController.deleteBloqueado
+
+#Publicaciones
+POST   /publicacion/create               controllers.PublicacionesController.create
+GET    /publicacion/getseguidos/$idUsuario<\d+>          controllers.PublicacionesController.getSeguidos(idUsuario : Int)
+GET    /publicacion/getusuario/$idUsuario<\d+>          controllers.PublicacionesController.getUsuario(idUsuario : Int)
+POST   /publicacion/delete               controllers.PublicacionesController.delete
+
+#Comentarios
+POST    /comentario/create               controllers.ComentariosController.create
+GET    /comentario/get/$idPublicacion<\d+>          controllers.ComentariosController.get(idPublicacion : Int)
+POST    /comentario/delete               controllers.ComentariosController.delete
+
+#Likes
+POST    /publicacion/createLike               controllers.PublicacionesController.createLike
+GET    /publicacion/getLikes/$idPublicacion<\d+>          controllers.PublicacionesController.getLikes(idPublicacion : Int)
+POST    /publicacion/deleteLike               controllers.PublicacionesController.deleteLike
+
+#Etiquetas
+POST    /publicacion/createEtiqueta               controllers.PublicacionesController.createEtiqueta
+GET    /publicacion/getEtiquetas/$idPublicacion<\d+>          controllers.PublicacionesController.getEtiquetas(idPublicacion : Int)
+POST    /publicacion/deleteEtiqueta               controllers.PublicacionesController.deleteEtiqueta
+
+#Mensajes
+POST    /mensaje/create               controllers.MensajesController.create
+GET    /mensaje/get/$idUsuario1<\d+>/$idUsuario2<\d+>          controllers.MensajesController.get(idUsuario1 : Int,idUsuario2 : Int)
+GET    /mensaje/getChats/$idUsuario<\d+>         controllers.MensajesController.getChats(idUsuario : Int)
+
+#Grupos
+POST    /grupo/create               controllers.GruposController.create
+GET    /grupo/get/$idUsuario<\d+>         controllers.GruposController.get(idUsuario : Int)
+POST    /grupo/createMensajeGrupo               controllers.GruposController.createMensajeGrupo
+POST    /grupo/addUsuarioGrupo               controllers.GruposController.addUsuarioGrupo
+POST    /grupo/removeUsuarioGrupo               controllers.GruposController.removeUsuarioGrupo
+GET    /grupo/getMensajes/$idGrupo<\d+>         controllers.GruposController.getMensajes(idGrupo : Int)
