@@ -25,7 +25,11 @@ class ComentariosController @Inject()(val controllerComponents: ControllerCompon
   def get(idPublicacion : Int) = Action { implicit request: Request[AnyContent] =>
     implicit val formats = DefaultFormats
     var result = ComentariosRepo.GetComentariosDePublicacion(idPublicacion)
-    Ok(result)
+    if(result.substring(result.length-1)=="]" || result.substring(result.length-1)=="}"){
+        Ok(result)
+    }else{
+        BadRequest(result)
+    }
   }
 
     implicit val CreateComentarioModelReads: Reads[CreateComentarioModel] = (

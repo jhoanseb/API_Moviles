@@ -26,7 +26,11 @@ class UsuariosController @Inject()(val controllerComponents: ControllerComponent
   def get(Apodo : String) = Action { implicit request: Request[AnyContent] =>
     implicit val formats = DefaultFormats
     val result = UsuariosRepo.GetUsuario(Apodo)
-    Ok(result)
+    if(result.substring(result.length-1)=="]" || result.substring(result.length-1)=="}"){
+      Ok(result)
+    }else{
+      BadRequest(result)
+    }
   }
   
   implicit val CreateUsuarioModelReads = Json.reads[CreateUsuarioModel]
@@ -136,12 +140,21 @@ class UsuariosController @Inject()(val controllerComponents: ControllerComponent
   def getSeguidos(idUsuario : Int) = Action { implicit request: Request[AnyContent] =>
     implicit val formats = DefaultFormats
     var result = UsuariosRepo.GetSeguidos(idUsuario)
-    Ok(result)
+    if(result.substring(result.length-1)=="]" || result.substring(result.length-1)=="}"){
+      Ok(result)
+    }else{
+      BadRequest(result)
+    }
+    
   }
   def getSeguidores(idUsuario : Int) = Action { implicit request: Request[AnyContent] =>
     implicit val formats = DefaultFormats
     var result = UsuariosRepo.GetSeguidores(idUsuario)
-    Ok(result)
+    if(result.substring(result.length-1)=="]" || result.substring(result.length-1)=="}"){
+      Ok(result)
+    }else{
+      BadRequest(result)
+    }
   }
   //Bloqueados
 
@@ -170,7 +183,11 @@ class UsuariosController @Inject()(val controllerComponents: ControllerComponent
   def getBloqueados(idUsuario : Int) = Action { implicit request: Request[AnyContent] =>
     implicit val formats = DefaultFormats
     var result = UsuariosRepo.GetBloqueados(idUsuario)
-    Ok(result)
+    if(result.substring(result.length-1)=="]" || result.substring(result.length-1)=="}"){
+      Ok(result)
+    }else{
+      BadRequest(result)
+    }
   }
 
   implicit val DeleteBloquearReads: Reads[DeleteBloquear] = (

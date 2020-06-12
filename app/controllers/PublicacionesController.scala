@@ -25,12 +25,20 @@ class PublicacionesController @Inject()(val controllerComponents: ControllerComp
   def getSeguidos(idUsuario : Int) = Action { implicit request: Request[AnyContent] =>
     implicit val formats = DefaultFormats
     var result = PublicacionesRepo.GetPublicacionesDeSeguidos(idUsuario)
-    Ok(result)
+    if(result.substring(result.length-1)=="]" || result.substring(result.length-1)=="}"){
+      Ok(result)
+    }else{
+      BadRequest(result)
+    }
   }
   def getUsuario(idUsuario : Int) = Action { implicit request: Request[AnyContent] =>
     implicit val formats = DefaultFormats
     var result = PublicacionesRepo.GetPublicacionesDeUsuario(idUsuario)
-    Ok(result)
+    if(result.substring(result.length-1)=="]" || result.substring(result.length-1)=="}"){
+      Ok(result)
+    }else{
+      BadRequest(result)
+    }
   }
 
     implicit val CreatePublicacionModelReads: Reads[CreatePublicacionModel] = (
@@ -77,7 +85,11 @@ class PublicacionesController @Inject()(val controllerComponents: ControllerComp
   def getLikes(idPublicacion : Int) = Action { implicit request: Request[AnyContent] =>
     implicit val formats = DefaultFormats
     var result = PublicacionesRepo.GetLikesDePublicacion(idPublicacion)
-    Ok(result)
+    if(result.substring(result.length-1)=="]" || result.substring(result.length-1)=="}"){
+      Ok(result)
+    }else{
+      BadRequest(result)
+    }
   }
 
     implicit val CreateLikeReads: Reads[CreateLike] = (
@@ -141,7 +153,11 @@ class PublicacionesController @Inject()(val controllerComponents: ControllerComp
     def getEtiquetas(idPublicacion : Int) = Action { implicit request: Request[AnyContent] =>
         implicit val formats = DefaultFormats
         var result = PublicacionesRepo.GetEtiquetasDePublicacion(idPublicacion)
-        Ok(result)
+        if(result.substring(result.length-1)=="]" || result.substring(result.length-1)=="}"){
+            Ok(result)
+        }else{
+            BadRequest(result)
+        }
     }
 
     implicit val DeleteEtiquetaReads: Reads[DeleteEtiqueta] = (
